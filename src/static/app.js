@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Clear loading message
       activitiesList.innerHTML = "";
+      activitySelect.innerHTML = '<option value="">-- Select an activity --</option>'; // Clear previous options
 
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
@@ -34,6 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const option = document.createElement("option");
         option.value = name;
         option.textContent = name;
+        if (spotsLeft === 0) {
+          option.disabled = true; // Disable option if activity is full
+          option.textContent += " (Full)";
+        }
         activitySelect.appendChild(option);
       });
     } catch (error) {
